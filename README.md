@@ -1,22 +1,22 @@
 # Process
-easy to use wrappers for reading and writing process memory externally
+Easy to use wrappers for reading and writing process memory externally
 
-# Example program
+# Example program: 
 ```cpp
 #include "include/Process.hpp"
 
 int main()
 {
-	Process process;
-	while (!process.attach(L"process.exe"))
-		Sleep(500);
+    Process process;
+    
+    while (!process.attach(L"process.exe"))
+        Sleep(500);
 
-	while (!process.getModule(L"module.dll"))
-		Sleep(500);
+    auto dll = process.getModule(L"module.dll");
+    auto valueRead = process.read<int>(dll + 0xDEEZ);
+    
+    process.write<int>(valueRead, 1);
 
-	auto valueRead = process.read<int>(0x4);
-	process.write<int>(0x4, 1);
-
-	return 0;
+    return 0;
 }
 ```
