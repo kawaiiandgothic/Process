@@ -21,7 +21,7 @@ int Process::attach(std::wstring processName)
     processEntry.dwSize = sizeof(PROCESSENTRY32);
 
     if (snapShot == INVALID_HANDLE_VALUE)
-        return false;
+        return 0;
 
     // Loop through running processes
     if (Process32First(snapShot, &processEntry))
