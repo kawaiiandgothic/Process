@@ -1,22 +1,14 @@
-# Process
-Easy to use wrappers for reading and writing process memory externally
+# proc
+[process](https://github.com/kawaiiandgothic/process) rewritten in c for 64 bit
 
-# Example program: 
-```cpp
-#include "include/Process.hpp"
+# usage
+```c
+#include "../proc.h"
 
-int main()
+int main(void)
 {
-    Process process;
-    
-    while (!process.attach(L"process.exe"))
-        Sleep(500);
-
-    auto dll = process.getModule(L"module.dll");
-    auto valueRead = process.read<int>(dll + 0xDEEZ);
-    
-    process.write<int>(valueRead, 1);
-
-    return 0;
+	proc_init("window name");
+	size_t dll = proc_module(L"dll.dll");
+	void* dll_boobs_val = proc_read(dll + 0x80085);
 }
 ```
